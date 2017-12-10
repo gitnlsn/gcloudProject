@@ -1,0 +1,39 @@
+<!doctype html>
+<html>
+  <head>
+    
+    <title>Sign Up</title>
+    <meta name='viewport' content="width=device-width, user-scalable=no">
+    <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>-->
+    
+    <style>
+      body{
+        text-align: center;
+        font-size: 40px;
+      }
+      .alert{
+        color: red;
+      }
+    </style>
+    
+    <!--<script>-->
+    <!--  function rot13Convert(){-->
+    <!--    console.log($("#text_toConvert"));-->
+    <!--    $("#text_converted").html("<p>"+$("#text_toConvert").val()+"</p>");-->
+    <!--  }-->
+    <!--</script>-->
+    
+  </head>
+  
+  <body>
+    <h1>Sign Up</h1>
+    <form method="post">
+      <label>Userame:          <input name="username"        value="%(username)s">        "%(username_check_msg)s"</label><br />
+      <label>Password:         <input name="password_trial"  value="%(password_trial)s">  "%(password_check_msg)s"</label><br />
+      <label>Password verify:  <input name="password_verify" value="%(password_verify)s"> "%(password_verif_msg)s"</label><br />
+      <label>email:            <input name="email"           value="%(email)s">           "%(email_check_msg)s"   </label><br />
+      <input type="submit">
+    </form>
+  </body>
+  
+</html>

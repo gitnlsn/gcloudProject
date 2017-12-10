@@ -1,0 +1,32 @@
+<!doctype html>
+<html>
+  <head>
+    
+    <title>Rot13</title>
+    <meta name='viewport' content="width=device-width, user-scalable=no">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    
+    <style>
+      body{
+        text-align: center;
+        font-size: 40px;
+      }
+    </style>
+    
+    <script>
+      function rot13Convert(){
+        console.log($("#text_toConvert"));
+        $("#text_converted").html("<p>"+$("#text_toConvert").val()+"</p>");
+      }
+    </script>
+    
+  </head>
+  
+  <body>
+    <h1>Rot13</h1>
+    <p id="text_converted"></p>
+    <textarea id="text_toConvert" rows="7" cols="60"></textarea>
+    <br /><button onclick="rot13Convert()">Convert</button>
+  </body>
+  
+</html>
