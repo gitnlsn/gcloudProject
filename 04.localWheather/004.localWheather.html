@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Local Weather</title>
+    <meta charset='UTF-8'/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    
+    <style>
+      body{
+        text-align: center;
+        font-size: 40px;
+      }
+    </style>
+    
+    <script>
+      var is_celcius = true;
+      
+      function update_location(){
+        console.log("funciton udpate_location: started");
+        
+        $.getJSON("https://freegeoip.net/json/", function(location_response){
+          console.log("funciton udpate_location: got coordinantes");
+          console.log(location_response);
+          $("#physical_location").html( "<p>Location: "+location_response.country_name+", "+location_response.region_code+", "+location_response.city+" ("+location_response.ip+")</p>" );
+          $("#local_coordinates").html("<p>latitude: "+location_response.latitude+"º</br>longitude: "+location_response.longitude+"º</p>");
+          
+          $.ajax({
+            url: "https://fcc-weather-api.glitch.me/api/current?lat="+location_response.latitude+"&lon="+location_response.longitude,
+            dataType: "json",
+            success: function(weather_response){
+              console.log("funciton udpate_location: got weather");
+              console.log(weather_response);
+              if (is_celcius){
+                $("#temperature").html("<p>Temperature: "+weather_response.main.temp+" ºC </br>Weather: "+weather_response.weather[0].main+"<img src='"+weather_response.weather[0].icon+"'></p>");
+                is_celcius = false;
+              }
+              else{
+                $("#temperature").html("<p>Temperature: "+weather_response.main.temp*1.8+32+" ºF </br>Weather: "+weather_response.weather[0].main+"<img src='"+weather_response.weather[0].icon+"'></p>");
+                is_celcius = true;
+              }
+              
+              console.log(weather_response.weather[0].icon);
+            }, // end - ajax success function
+          });
+        }); // end - getJSON success function
+        console.log("udpate_location: finished.");
+      } // end - update_location
+      
+      $(document).ready(function(){
+        console.log("document ready");
+        update_location();
+      });
+      
+    </script>
+    
+  </head>
+  <body>
+    <h1>Local Weather Machine</h1>
+    <p id="physical_location">loading</p>
+    <p id="local_coordinates"></p>
+    <p id="temperature"><img id="weather_image" src=""></p>
+    <button onclick="update_location()">Change!</button>
+  </body>
+</html>
